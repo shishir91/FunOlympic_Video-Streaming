@@ -18,5 +18,7 @@ PORT = "port_number"
 ```
 yarn add "dependencies_name"
 ```
-### Add videos
-create a folder named "videos" inside "public" and add your videos 
+### Upload Live, Videos, News
+Create an admin in your database.
+Login with admin's login credentials
+Add Videos and News as your wish
