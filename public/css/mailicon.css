@@ -1,0 +1,45 @@
+:root {
+  --w: 10rem;
+  --h: 7rem;
+  --b: 5px solid black;
+}
+
+.dis{
+  text-align: center;
+}
+
+#resend-code-button{
+  color: black;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40vh;
+  margin: 0;
+  padding: 0;
+}
+
+.mail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--w);
+  height: var(--h);
+  border: var(--b);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.mail:after {
+  content: "";
+  width: calc(var(--w) / 1.414);
+  height: calc(var(--w) / 1.414);
+  transform-origin: 50% 50%;
+  transform: rotate(45deg) translateX(calc(var(--h) / (-1.414 * 2)))
+    translateY(calc(var(--h) / (-1.414 * 2)));
+  border: var(--b);
+  box-sizing: border-box;
+}

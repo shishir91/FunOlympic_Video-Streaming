@@ -1,0 +1,43 @@
+<%- include ("admin_header.ejs") %>
+<style>
+    label{
+        font-weight: bold;
+    }
+    .form{
+        border: solid white;
+        border-radius: 25px;
+        width: 500px;
+        background: #ffffff;
+        padding: 20px;
+    }
+</style>
+
+<section id="content">
+  <main>
+
+    <div class="container form">
+        <h3>Upload Video</h3>
+        <form  method="POST" action="/admin/addVideo" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="title" id="title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Description</label> <br>
+                <textarea class="form-control" id="description" name="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Select Video</label><br>
+                <input type="file" name="video" class="form-control-file">
+            </div>
+            <div class="form-group">
+                <label>Select Thumbnail</label><br>
+                <input type="file" name="thumbnail" class="form-control-file">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+
+  </main>
+</section>

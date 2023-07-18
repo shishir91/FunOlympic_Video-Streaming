@@ -1,0 +1,49 @@
+<%- include ("head") %> <%- include ("nav") %>
+
+<div class="live" style="width: 750px; margin: 35px; justify-content: center;">
+  <div  style="position: relative; display: inline-block;">
+    <video src="/uploads/<%=v%>" width="100%" autoplay controls controlsList="nodownload" class="video" id="live"></video>
+    
+  </div>
+  <h3><%=t%></h3>
+  <h6><%=d%></h6>
+</div>
+
+<div class="mt-5 bg-dark" data-bs-theme="dark">
+  <div class="container text-bg-dark">
+    <div class="container d-flex">
+      <h3 class="m-3 pt-3 h3">Other Highlights and Replays</h3>
+    </div>
+    
+    <% if(otherData.length > 0){
+      otherData.forEach((otherData) =>{%>
+    <div class="container d-flex">
+      
+      <img
+      src="/uploads/<%=otherData.thumbnail%>"
+      class="live_image"
+      />
+
+      <a href="/videoPlayer?t=<%=otherData.title%>&d=<%=otherData.description%>&v=<%=otherData.video%>" class="text-bg-dark fs-5" style="margin-left: 25px;">
+        <span class="h5"><%=otherData.title%></span>
+        <br><br>
+        <span class="h6"><%=otherData.description%></span>
+      
+      </a>
+    </div>
+    <%
+  });
+}%>
+  </div>
+</div>
+
+<%- include ("footer") %>
+
+<script>
+  const isLogin = "<%=isLogin%>";
+  const live = document.getElementById("live");
+  live.autoplay = true;
+
+  const videos = document.querySelectorAll(".video");
+
+</script>

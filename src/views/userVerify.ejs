@@ -1,0 +1,60 @@
+<%- include ("head") %>
+  <%- include ("nav") %>
+
+    <div class="container login_signup" style="width: 400px;">
+      <div class="main">
+        <div class="mail"></div>
+        <h5 class="dis">
+          Email has sent to your email address.
+          <b id="email">
+            <%=email%>
+          </b>
+        </h5>
+      </div>
+
+      <div class="mb-3">
+        <label for="verification_code" class="form-label" style="font-weight: bold">
+          Verification Code:
+        </label>
+        <input type="text" class="form-control" id="code" />
+      </div>
+      <div id="countdown-timer"></div>
+      <a href="" id="resend-code-button" style="display: none; color:blue; font-weight: bold;">Send Code Again</a>
+      <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+    </div>
+
+    <script src="/js/verify.js"></script>
+    <script>
+      async function postData(url = "", data = {}) {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        return response.json();
+      }
+
+      let submit = document.getElementById("submit");
+
+      let resend = document.getElementById("resend-code-button");
+      resend.addEventListener("click", async () => {
+        let emailid = await document.getElementById("email");
+        let email = await emailid.innerHTML;
+        console.log(email);
+        let respo = await postData("/sendmail", { email });
+      });
+      submit.addEventListener("click", async () => {
+        let code = document.getElementById("code").value;
+        let emailid = await document.getElementById("email");
+        let email = await emailid.innerHTML;
+        let resp = await postData("/verify", { code, email });
+        if (resp.success) {
+          alert(resp.message);
+          window.location.href = "/newPassword";
+        } else {
+          alert(resp.message);
+        }
+      });
+    </script>

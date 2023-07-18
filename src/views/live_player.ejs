@@ -1,0 +1,121 @@
+<%- include ("head") %> <%- include ("nav") %>
+<style>
+  .h {
+    margin: 50px;
+    margin-top: 20px;
+  }
+  .ccontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.5fr;
+    gap: 10px 10px;
+    grid-auto-flow: row;
+    grid-template-areas: "live highlights";
+  }
+
+  .live {
+    grid-area: live;
+  }
+
+  .highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.3fr 1.3fr 1.3fr;
+    gap: 0px 10px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "a a"
+      "c d"
+      "e f";
+    grid-area: highlights;
+  }
+
+  .c {
+    grid-area: c;
+  }
+
+  .d {
+    grid-area: d;
+  }
+
+  .e {
+    grid-area: e;
+  }
+
+  .f {
+    grid-area: f;
+  }
+  
+  #live::-webkit-media-controls-current-time-display,
+  #live::-webkit-media-controls-time-remaining-display,
+  #live::-webkit-media-controls-timeline{
+    display: none;
+  }
+
+
+</style>
+
+<div class="live" style="width: 750px; margin: 35px;">
+  <div  style="position: relative; display: inline-block;">
+    <video src="/uploads/<%=v%>" width="100%" controls controlsList="nodownload" class="video" id="live"></video>
+    <div style="position: absolute; top: 10px; right: 10px; color: white; font-weight: bold; background-color: rgba(248, 12, 12, 0.5); padding: 5px;">
+      <span style="display: inline-block; width: 10px; height: 10px; background-color: rgb(236, 0, 0); border-radius: 50%; margin-right: 5px;"></span>
+      LIVE
+    </div>
+  </div>
+  <h4><%=t%></h4>
+  <h6><%=d%></h6>
+</div>
+
+<div class="mt-5 bg-dark" data-bs-theme="dark">
+  <div class="container text-bg-dark">
+    <div class="container d-flex">
+      <h3 class="m-3 pt-3">Other Live</h3>
+    </div>
+    
+    <% if(otherData.length > 0){
+      otherData.forEach((otherData) =>{%>
+    <div class="container d-flex">
+      
+      <img
+      src="/uploads/<%=otherData.live_thumbnail%>"
+      class="live_image"
+      />
+
+      <a href="/livePlayer?t=<%=otherData.title%>&d=<%=otherData.description%>&v=<%=otherData.live%>" class="text-bg-dark fs-5" style="margin-left: 25px;">
+        <%=otherData.title%>
+        <br><br>
+        <%=otherData.description%>
+      
+      </a>
+    </div>
+    <%
+  });
+}%>
+  </div>
+</div>
+
+<%- include ("footer") %>
+
+<script>
+  const isLogin = "<%=isLogin%>";
+  const live = document.getElementById("live");
+  live.autoplay = true;
+  live.addEventListener('loadedmetadata', ()=> {
+    live.currentTime = 965; // Set video playback to 1 minute (60 seconds)
+    live.play();
+  });
+
+  const videos = document.querySelectorAll(".video");
+
+  console.log("<%=isLogin%>");
+  console.log(isLogin);
+
+  // videos.forEach((video) => {
+  //   video.addEventListener("click", () => {
+    //     if (isLogin == "false") {
+      //       window.location.href = "/login";
+      //     }
+  //   });
+  // });
+</script>

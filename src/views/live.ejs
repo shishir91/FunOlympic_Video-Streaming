@@ -1,0 +1,31 @@
+<%- include ("head") %> <%- include ("nav") %>
+
+<div class="mt-5 bg-dark" data-bs-theme="dark">
+  <div class="container text-bg-dark">
+    <div class="container d-flex">
+      <h3 class="m-3 pt-3">Live Now</h3>
+    </div>
+    
+    <% if(data.length > 0){
+      data.forEach((data) =>{%>
+    <div class="container d-flex">
+      
+      <img
+      src="/uploads/<%=data.live_thumbnail%>"
+      class="live_image"
+      />
+
+      <a href="/livePlayer?t=<%=data.title%>&d=<%=data.description%>&v=<%=data.live%>" class="text-bg-dark fs-5" style="margin-left: 25px;">
+        <%=data.title%>
+        <br><br>
+        <%=data.description%>
+      
+      </a>
+    </div>
+    <%
+  });
+}%>
+  </div>
+</div>
+
+<%- include ("footer") %>

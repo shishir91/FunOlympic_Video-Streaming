@@ -1,0 +1,96 @@
+<%- include ("admin_header.ejs") %>
+
+  <section id="content">
+    <main>
+      <div class="table-data">
+        <div class="order">
+          <div class="head">
+            <h3>Users List</h3>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(data.length> 0){
+                data.forEach((data) =>{
+                %>
+                <tr>
+                  <td id="">
+                    <%=data.id%>
+                  </td>
+                  <td>
+                    <p>
+                      <%= data.fullname%>
+                    </p>
+                  </td>
+                  <td>
+                    <p>
+                      <%= data.username%>
+                    </p>
+                  </td>
+                  <td>
+                    <p>
+                      <%= data.email%>
+                    </p>
+                  </td>
+                  <td>
+                    <% if(data.blocked){ %><span class="status pending">Blocked</span>
+                      <% }else if(data.verified){%><span class="status completed">Verified</span>
+                        <%}else{%><span class="status pending">Not Verified</span>
+                          <%} %></span>
+                  </td>
+                  <td>
+                    <% if(data.blocked){ %><a href="/admin/users/unblock/<%= data.id %>"
+                        class="btn btn-primary users_action" id="unblockUser">Unblock</a>
+                      <%}else{%>
+                        <a href="/admin/users/block/<%= data.id %>" class="btn btn-primary users_action"
+                          id="blockUser">Block</a>
+                        <%}%>
+                          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  Are you sure you want to delete <%=data.username %>?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                  <button type="button" class="btn btn-danger"><a
+                                      href="/admin/users/delete/<%= data.id %>" class=" text-white">Yes</a></button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <a href="" class="btn btn-danger users_action" id="deleteUser" class="btn btn-primary d-none"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</a>
+                  </td>
+                </tr>
+
+                <% }); } %>
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </main>
+  </section>
+
+
+  <script>
+
+
+  </script>

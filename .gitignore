@@ -1,0 +1,12 @@
+node_modules
+.vscode
+.git
+
+.env
+
+yarn-error.log
+
+public/uploads/
+
+eg.html
+loader.html

@@ -1,0 +1,113 @@
+<%- include ("admin_header.ejs") %>
+
+<section id="content">
+ 
+ <!-- MAIN -->
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+
+        <ul class="box-info">
+          <a href="/admin/users">
+            <li>
+              <i class="bx bxs-group"></i>
+              <span class="text">
+                <h3><%=users_no%></h3>
+                <p>Users</p>
+              </span>
+            </li>
+          </a>
+          <li>
+            <i class="bx bxs-user"></i>
+            <span class="text">
+              <h3><%=admins_no%></h3>
+              <p>Admin</p>
+            </span>
+          </li>
+          <a href="/admin/videos">
+          <li>
+              <i class="bx bxs-videos"></i>
+              <span class="text">
+                <h3><%=videos_no%></h3>
+                <p>Videos</p>
+              </span>
+            </li>
+          </a>
+        </ul>
+
+        <div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Users List</h3>
+              <h6>
+                <a
+                  class="d-flex justify-content-end align-self-end m-3 pt-3"
+                  href="/admin/users"
+                  >View All
+                  <i class="bx bx-right-arrow-alt" style="padding-top: 2px"></i>
+                </a>
+              </h6>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% 
+                if(data.length > 0){
+                    data.forEach((data) =>{
+                        %>
+                        <tr>
+                            <td><%=data.id%></td>
+                          <td>
+                            <p><%= data.fullname%></p>
+                          </td>
+                          <td>
+                            <% if(data.blocked){
+                                %><span class="status pending">Blocked</span><%
+                            }else if(data.verified){%><span class="status completed">Verified</span><%}else{%><span class="status pending">Not Verified</span><%} %></span></td>
+                        </tr>
+            
+                        <%
+    
+                    });
+                }
+                %>
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="todo">
+            <div class="head">
+              <h3>Live</h3>
+              <h6>
+                <a
+                  class="d-flex justify-content-end align-self-end m-3 pt-3"
+                  href="/admin/live"
+                  >View All
+                  <i class="bx bx-right-arrow-alt" style="padding-top: 2px"></i>
+                </a>
+              </h6>
+            </div>
+            <% if(liveData.length > 0){
+                liveData.forEach((liveData) =>{%>
+                  <ul class="todo-list">
+                    <li class="completed">
+                      <p><b><%=liveData.title%></b></p>
+                      <p><%=liveData.description%></p>
+                  </ul>
+                <%}); 
+              }%>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->

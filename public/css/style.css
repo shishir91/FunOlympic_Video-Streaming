@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@500&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-text-color: #183b56;
+  --secondary-text-color: #577592;
+  --accent-color: #2294ed;
+  --accent-color-dark: #1d69a3;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--primary-text-color);
+  background-color: #ccc;
+}
+.login_signup {
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#signup-container {
+  margin-top: 50px;
+}
+
+.layout {
+  width: 1336px;
+  height: 768px;
+
+  display: flex;
+  gap: 16px;
+}
+
+.grow1 {
+  flex-grow: 1;
+}
+
+

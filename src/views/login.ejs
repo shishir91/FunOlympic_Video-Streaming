@@ -1,0 +1,65 @@
+<%- include ("head") %>
+<%- include ("nav") %>
+
+<div class="login-container">
+  <div class="container login_signup">
+    <center>
+      <h2>Login</h2>
+      <span class="alert alert-danger" role="alert" id="error" style="display: none;"></span>
+    </center>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" />
+    </div>
+    <div class="mb-3">
+      <div class="g-recaptcha" data-sitekey="6LfABusmAAAAAH-X3QqUMCc9mxXnicJv3wi2ru-Y"></div>
+    </div>
+    <div>
+      <a href="/forgotPassword" style="font-weight: bold;">Forgot Password?</a>
+    </div>
+    <button type="submit" class="btn btn-primary" id="submit" style="width: 100%;">Login</button>
+    <div>
+      New Here? <a href="/signup" style=" font-weight: bold;"> Sign-Up</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  async function postData(url = "", data = {}) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  }
+
+  let submit = document.getElementById("submit");
+  submit.addEventListener("click", async () => {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let captcha = document.querySelector('#g-recaptcha-response').value;
+    var resp = await postData("/login", { username, password, captcha, secretKey: '6LfABusmAAAAANjbvH7pWcIu6wOdnJlasD4KONrB' });
+    if (resp.success) {
+      document.getElementById("error").style.display = 'none';
+      window.location.href = "/";
+    } else {
+      document.getElementById("error").style.display = 'block';
+      document.getElementById("error").innerText = resp.message;
+    }
+  });
+
+</script>

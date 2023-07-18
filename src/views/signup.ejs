@@ -1,0 +1,81 @@
+<%- include ("head") %>
+<%- include ("nav") %>
+
+  <div class="container login_signup" id="signup-container" style="margin-top: 100px;">
+    <center>
+      <h2>Sign-Up</h2>
+        <span class="alert alert-danger" role="alert" id="error" style="display: none;""></span>
+    </center>
+    <div class="form">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" />
+        <span class="text-danger" id="p_error" style="display: none;"></span>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="confirm_password" />
+        <span class="text-danger" id="cp_error" style="display: none;"></span>
+      </div>
+      <div class="mb-3">
+        <div class="g-recaptcha" data-sitekey="6LfABusmAAAAAH-X3QqUMCc9mxXnicJv3wi2ru-Y"></div>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submit" style="width: 100%;">Sign-Up</button>
+      <div>
+        Already have an account?
+        <a href="/login" style=" font-weight: bold"> Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/signup.js"></script>
+<script>
+  async function postData(url = "", data = {}) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  }
+
+  let submit = document.getElementById("submit");
+  submit.addEventListener("click", async () => {
+    let name = document.getElementById("name").value;
+    let username = document.getElementById("username").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let confirm_password = document.getElementById("confirm_password").value;
+    let captcha = document.querySelector('#g-recaptcha-response').value;
+
+    let resp = await postData("/signup", { name, username, email, password, confirm_password, captcha, secretKey: '6LfABusmAAAAANjbvH7pWcIu6wOdnJlasD4KONrB' });
+    if (resp.success) {
+      document.getElementById("error").style.display = 'none';
+      showLoader();
+      let respo = await postData("/sendmail", { email });
+      hideLoader();
+      if (respo.success){
+        alert("Email Sent!!!");
+        window.location.href = "/verify";
+      }
+    }else{
+      document.getElementById("error").style.display = 'block';
+      document.getElementById("error").innerText = resp.message;
+    }
+  });
+
+</script>

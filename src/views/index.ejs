@@ -1,0 +1,218 @@
+<%- include ("head") %> <%- include ("nav") %>
+
+<script>
+  console.log("<%=liveData.live_thumbnail %>");
+</script>
+
+<div class="mt-5 bg-dark" data-bs-theme="dark">
+  <div class="container text-bg-dark">
+    <div class="container d-flex">
+      <h3 class="m-3 pt-3">Live Now</h3>
+      <h6 class="ms-auto">
+        <a
+          class="d-flex justify-content-end align-self-end m-3 pt-3 text-bg-dark"
+          href="/live"
+          >View All
+          <i class="bx bx-right-arrow-alt" style="padding-top: 2px"></i>
+        </a>
+      </h6>
+    </div>
+    
+    <% if(liveData.length > 0){
+      var counter = 0;
+      liveData.forEach((liveData) =>{
+        if (counter < 1) {%>
+    <div class="container d-flex">
+      
+      <img
+      src="/uploads/<%=liveData.live_thumbnail%>"
+      class="live_image"
+      />
+
+      <a href="/livePlayer?t=<%=liveData.title%>&d=<%=liveData.description%>&v=<%=liveData.live%>" class="text-bg-dark fs-5" style="margin-left: 25px;">
+        <%=liveData.title%>
+        <br><br>
+        <%=liveData.description%>
+      
+      </a>
+    </div>
+    <%
+    counter++;
+      }
+  });
+}%>
+  </div>
+</div>
+
+<br />
+<hr />
+
+<div class="container">
+  <div class="container d-flex">
+    <h3 class="m-3 pt-3">Highlights and Replays</h3>
+    <h6 class="ms-auto">
+      <a
+        class="d-flex justify-content-end align-self-end m-3 pt-3"
+        href="/highlights"
+        >View All
+        <i class="bx bx-right-arrow-alt" style="padding-top: 2px"></i>
+      </a>
+    </h6>
+  </div>
+  <div
+    class="news"
+    style="display: flex; padding-top: 20px; justify-content: space-around"
+  >
+  <% if(videoData.length > 0){
+    var counter = 0;
+        videoData.forEach((videoData) =>{
+          if (counter < 3) {%>
+            %>
+            <a href="/videoPlayer?t=<%=videoData.title%>&d=<%=videoData.description%>&v=<%=videoData.video%>">
+    <div class="card news-card" style="width: 18rem">
+      <img
+        src="/uploads/<%=videoData.thumbnail%>"
+        alt="news-image"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title"><%=videoData.title%></h5>
+        <p class="card-text"><%=videoData.description%></p>
+      </div>
+    </div>
+  </a>
+    <%
+    counter++;
+  }
+      });
+  }
+  %>
+    
+  </div>
+</div>
+
+<br />
+<hr />
+
+<div class="container" style="padding-top: 30px">
+  <div class="container d-flex">
+    <h3 class="m-3 pt-3">News</h3>
+    <h6 class="ms-auto">
+      <a class="d-flex justify-content-end align-self-end m-3 pt-3" href="/news"
+        >View All
+        <i class="bx bx-right-arrow-alt" style="padding-top: 2px"></i>
+      </a>
+    </h6>
+  </div>
+  <div
+    class="news"
+    style="display: flex; padding-top: 20px; justify-content: space-around"
+  >
+    <div class="card news-card" style="width: 18rem">
+      <img
+        src="https://img.olympicchannel.com/images/image/private/t_16-9_480/f_auto/v1538355600/primary/a8xqjnjen93z4ccpzdt7"
+        alt="news-image"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          Fun Olympic 2023: Princess-inspired Healey writes fairytale ending in
+          Krakow with gold
+        </h5>
+        <p class="card-text">
+          British archer Penny Healey has one up on a Disney princess who
+          inspired her to take up archery.
+        </p>
+      </div>
+    </div>
+    <div class="card news-card" style="width: 18rem">
+      <img
+        src="https://img.olympicchannel.com/images/image/private/t_16-9_480/f_auto/v1538355600/primary/vwlm1zkxqseyupu7dt5o"
+        alt="news-image"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          Fun Olympic 2023 Wimbledon preview: Djokovic eyes Open Era record 24th
+          major; Swiatek, Rybakina lead women - Schedule, how to watch
+        </h5>
+        <p class="card-text">
+          At age 36, Novak Djokovic has made his intentions clear: He's playing
+          for t...
+        </p>
+      </div>
+    </div>
+    <div class="card news-card" style="width: 18rem">
+      <img
+        src="https://img.olympicchannel.com/images/image/private/t_16-9_480/f_auto/v1538355600/primary/hp1uhwqgbrguajcqdpgp"
+        alt="news-image"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          Fun Olympic 2023: Katie Ledecky out touched by Claire Weinstein in
+          200m free
+        </h5>
+        <p class="card-text">
+          16-year-old Claire Weinstein chased down seven-time Olympic gold
+          medallist Katie Ledecky Wednesday (27 June) to win the 200m freestyle
+          crown at the U.S. Swimming Championships in Indianapolis.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br />
+<hr />
+
+<div class="container" style="padding-top: 30px">
+  <div class="container d-flex">
+    <h3 class="m-3 pt-3">Sports</h3>
+    <h6 class="ms-auto">
+      <a
+        class="d-flex justify-content-end align-self-end m-3 pt-3"
+        href="/sports"
+        >View All
+        <i class="bx bx-right-arrow-alt" style="padding-top: 2px"></i>
+      </a>
+    </h6>
+  </div>
+  <div
+    class="news"
+    style="display: flex; padding-top: 20px; justify-content: space-around"
+  >
+    <div class="card news-card" style="width: 18rem">
+      <img
+        src="https://img.olympicchannel.com/images/image/private/t_s_w1340/t_s_16_9_g_auto/f_auto/primary/ppj2nwstefuvg85p8tlx"
+        alt="news-image"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title">Swimming</h5>
+      </div>
+    </div>
+    <div class="card news-card" style="width: 18rem">
+      <img
+        src="https://e0.365dm.com/21/07/1600x900/skysports-lauren-price-boxing_5463465.jpg?20210731085906"
+        alt="news-image"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title">Boxing</h5>
+      </div>
+    </div>
+    <div class="card news-card" style="width: 18rem">
+      <img
+        src="https://img.olympicchannel.com/images/image/private/t_16-9_760/f_auto/v1538355600/primary/o2dn1lo38v9i5o5xnvbd"
+        alt="news-image"
+        class="card-img-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title">Archery</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include ("footer") %>
